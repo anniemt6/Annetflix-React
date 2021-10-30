@@ -1,0 +1,1 @@
+Film-service using React-Redux, Typescript.

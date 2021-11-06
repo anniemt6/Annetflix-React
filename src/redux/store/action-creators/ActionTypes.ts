@@ -7,8 +7,14 @@ export const enum AuthActionType {
     SIGN_OUT = 'SIGN_OUT'
 }
 
-export const enum AuthResultActionType {
-    ERROR = 'ERROR',
-    SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS',
-    SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS'
+export const enum FilmsActionType {
+    FETCH_FILMS = 'ADD_FILMS',
+    SAVE_TO_FAVORITES = 'SAVE_TO_FAVORITES',
+    REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES',
+    FILTER_BY_GENRE = 'FILTER_BY_GENRE'
+}
+
+export const enum ResultActionType {
+    SUCCESS = 'SUCCESS',
+    ERROR = 'ERROR'
 }

@@ -8,17 +8,20 @@ const initialState: Result<IUser> = {
         password: ''
     },
     error: ''
-}
+};
 
 export const authReducer = (state = initialState, action: AuthResultOrReset): Result<IUser> => {
     switch (action.type) {
         case ResultActionType.ERROR:
-            return { data: { login: '', password: '' }, error: `There is no user with login ${action.payload.login}` }
+            return {
+                data: { login: '', password: '' },
+                error: `There is no user with login ${action.payload.login}`
+            };
         case ResultActionType.SUCCESS:
-            return { data: action.payload, error: '' }
+            return { data: action.payload, error: '' };
         case ResetActionType.RESET:
-            return { ...initialState }
+            return { ...initialState };
         default:
-            return state
+            return state;
     }
 }

@@ -1,22 +1,38 @@
+// libs
 import * as yup from 'yup';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { useFormik, FormikProps } from 'formik';
+import { Navigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useDispatch } from 'react-redux';
-import { resetState, signIn } from '../redux/store/action-creators/actions';
-import { IUser, Result } from '../redux/store/interfaces';
+import { Modal } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import logo from '../dist/img/logo.png';
+
+// typed hooks
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { Modal } from '@mui/material';
-import { FormEvent } from 'react';
+
+// components
+import { Logo } from '../components/Logo'
+
+// style
 import { button, containerBox, containerGrid,
     formBox, mainGrid, modal, pageGrid } from '../dist/style/SignIn/SignInStyle';
+
+// middlewares
+import {signIn} from "../redux/store/middlewares/authMiddleware";
+
+// actions
+import { resetState } from '../redux/store/action-creators/actions';
+
+// interfaces
+import { IUser, Result } from '../redux/store/interfaces';
+import { singInSelector } from '../components/selectors/selectors';
 
 
 const validationSchema = yup.object({
@@ -34,9 +50,10 @@ const validationSchema = yup.object({
 
 const theme = createTheme();
 
+
 export const SignIn = () => {
     const dispatch = useDispatch();
-    const authResult = useTypedSelector(state => state.authResult);
+    const { login, password, error } = useTypedSelector(singInSelector);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -61,6 +78,12 @@ export const SignIn = () => {
         },
     });
 
+    if (error === '' && login !== '' && password !== '') {
+        return (
+            <Navigate to={"home"} />
+        )
+    }
+
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -82,12 +105,7 @@ export const SignIn = () => {
                         square
                     >
                         <Box sx={containerBox}>
-                            <img
-                                src={logo}
-                                alt="logo"
-                                height="45"
-                            />
-
+                            <Logo />
                             <Box sx={formBox}>
                                 <form onSubmit={handleSubmit}>
                                     <TextField
@@ -128,11 +146,11 @@ export const SignIn = () => {
                                 </form>
 
                                 <Modal
-                                    open={authResult.error !== ''}
+                                    open={error !== ''}
                                     onClose={handleClose}
                                 >
                                     <Box sx={modal}>
-                                        {authResult.error}
+                                        {error}
                                     </Box>
                                 </Modal>
                             </Box>
@@ -143,3 +161,4 @@ export const SignIn = () => {
         </>
     );
 }
+

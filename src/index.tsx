@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom';
 import { store } from "./redux/store/store";
 import { Provider } from "react-redux";
-import { SignIn } from './pages/SignIn';
+import { App } from './App';
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <SignIn />
+        <App />
     </Provider>,
     document.getElementById('root')
 );

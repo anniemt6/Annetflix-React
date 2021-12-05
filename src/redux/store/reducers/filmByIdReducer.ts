@@ -6,7 +6,11 @@ const initialState: Result<IFilm> = {
     data: {
         id: 1,
         title: '',
-        vote_average: 0
+        vote_average: 0,
+        poster_path: '',
+        overview: '',
+        popularity: 0,
+        release_date: ''
     },
     isLoading: false,
     error: ''

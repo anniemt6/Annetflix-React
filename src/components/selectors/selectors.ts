@@ -54,9 +54,21 @@ export const filmInfoSelector =
              data: {
                  title,
                  vote_average,
+                 poster_path,
+                 overview,
+                 popularity,
+                 release_date
              }
          },
-    }: IFilmInfo) => ({ title, vote_average });
+    }: IFilmInfo) =>
+        ({
+            title,
+            vote_average,
+            poster_path,
+            overview,
+            popularity,
+            release_date
+        });
 
 export const favoritesSelector =
     ({

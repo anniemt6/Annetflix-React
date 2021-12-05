@@ -13,6 +13,10 @@ export interface IFilm {
     id: number;
     title: string;
     vote_average: number;
+    poster_path: string;
+    overview: string;
+    popularity: number;
+    release_date: string;
     [key: string]: any;
 }
 
@@ -77,15 +81,16 @@ export interface ISignInSelector {
 
 export interface IFilmInfo {
     filmByIdData: {
-        data: {
-            title: string;
-            vote_average: number,
-        };
+        data: IFilm;
     };
 }
 
 export interface IFavorites {
     favFilmsData: Array<IFilm>;
+}
+
+export interface IFavoriteSelector {
+    favoritesData: IFavorites;
 }
 
 export interface IFavoriteSelector {

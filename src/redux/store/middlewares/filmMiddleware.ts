@@ -16,6 +16,12 @@ const initialValues: Partial<IFilters> = {
     averageValue: 6
 };
 
+/**
+ * middleware for fetching films with the given filters and page
+ * @param {number} page - The page of the films response
+ * @param {Partial<IFilters>} filters - The filters params
+ * @returns {function} - The function that could dispatch data into reducer
+ */
 export const setFilms = (page: number, filters = initialValues) => (dispatch: Dispatch<FilmsAction>): void => {
     dispatch(setFilmLoading(true));
     fetchData<IResponse>(buildFetchFilmsUrl(page, filters))
